@@ -41,7 +41,7 @@ var nicks = argv.n || argv.nicks,
 
 if (help) {
     console.log('usage: ' + package.name + ' [-nsedfjh] <log filenames>\n');
-    console.log('  -n, --nicks    nicks separated by commas to filter')
+    console.log('  -n, --nicks    nicks separated by commas to filter');
     console.log('  -s, --start    start date (in any format accepted by Date)');
     console.log('  -e, --end      end date (in any format accepted by Date)');
     console.log('  -d, --date     date format');

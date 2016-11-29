@@ -44,13 +44,13 @@ var logs = [
 var parsed = [
     {
         time: new Date('2016-10-19T03:56:37.000Z'),
-        action: 'do',
+        action: 'action',
         nick: 'bedroom_eyes',
         message: 'cries'
     },
     {
         time: new Date('2016-11-22T09:09:33.000Z'),
-        action: 'say',
+        action: 'privmsg',
         nick: 'Jamal_Jones',
         message: 'i dont like bean peer pressured'
     },

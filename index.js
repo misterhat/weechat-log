@@ -20,7 +20,7 @@
 var byline = require('byline'),
     map = require('through2-map');
 var ACTIONS = {
-        '*': 'do',
+        '*': 'action',
         '<--': 'part',
         '-->': 'join',
         '--': 'mode'
@@ -49,8 +49,8 @@ var ACTIONS = {
     KICK_MATCH = new RegExp('^' + NICK_MATCH.source + ' has kicked ' +
                             NICK_MATCH.source + COMMENT_MATCH.source),
     MODE_MATCH = new RegExp('^Mode ' + CHAN_MATCH.source + ' \\[([\\+|\\-]' +
-                            '[A-Za-z]+)' + '\\s?' + NICK_MATCH.source + '?\\]' +
-                            ' by ' + NICK_MATCH.source);
+                            '[A-Za-z]+)' + '\\s?' + NICK_MATCH.source +
+                            '?\\] by ' + NICK_MATCH.source);
 
 function trimFound(line, found) {
     return line.replace(found, '').trim();
@@ -78,7 +78,7 @@ function parseLine(line) {
     parsed.action = line.match(ACTION_MATCH);
 
     if (!parsed.action ||!parsed.action[1]) {
-        parsed.action = 'say';
+        parsed.action = 'privmsg';
     } else {
         line = trimFound(line, parsed.action[1]);
         parsed.action = ACTIONS[parsed.action[1]];
@@ -144,8 +144,8 @@ function parseLine(line) {
                 parsed.nick = match[4];
             }
             break;
-        case 'say':
-        case 'do':
+        case 'privmsg':
+        case 'action':
             parsed.nick = line.match(new RegExp('^' + NICK_MATCH.source + '\\s+'));
             parsed.nick = parsed.nick ? parsed.nick[1] : null;
             parsed.message = trimFound(line, parsed.nick);
