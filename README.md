@@ -27,7 +27,6 @@ usage: weechat-log [-nsedfjh] <log filenames>
 ```
 
     $ weechat-log ~/.weechat/logs/* -f '{action}:{message}'
-
     $ weechat-log -f '{ops}:{halfops}:{nicks}' < ~/.weechat/logs/*
 
 ## Example
