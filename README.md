@@ -13,11 +13,9 @@ For the module:
 
 ## Usage
 ```
-usage: weechat-log [-nsedfjh] <log filenames>
+usage: weechat-log [-ndfjh] <log filenames>
 
   -n, --nicks    nicks separated by commas to filter
-  -s, --start    start date (in any format accepted by Date)
-  -e, --end      end date (in any format accepted by Date)
   -d, --date     date format
   -f, --format   line output format
   -j, --json     output in JSON format (overrides format)
