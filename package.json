@@ -1,6 +1,6 @@
 {
   "name": "weechat-log",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "stream plaintext weechat logs into objects",
   "main": "index.js",
   "scripts": {
@@ -30,7 +30,7 @@
     "merge-stream": "^1.0.1",
     "minimist": "^1.2.0",
     "string-template": "^1.0.0",
-    "through2-filter": "^2.0.0"
+    "through2-map": "^3.0.0"
   },
   "devDependencies": {
     "tap": "^8.0.1"

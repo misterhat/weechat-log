@@ -38,7 +38,10 @@ var logs = [
 
     '2016-11-11 17:09:06     --      goku has changed topic for #weblove ' +
     'from "Uh-ah-oh we need some help from above" to "Now offering ' +
-    'complimentary therapy dogs"'
+    'complimentary therapy dogs"',
+
+    '2016-10-08 01:43:53     --      Channel created on Thu, 07 Jan 2016 ' +
+    '02:45:47',
 ];
 
 var parsed = [
@@ -141,6 +144,11 @@ var parsed = [
         channel: '#weblove',
         topic: 'Uh-ah-oh we need some help from above',
         to: 'Now offering complimentary therapy dogs'
+    },
+    {
+        time: new Date('2016-10-08T06:43:53.000Z'),
+        action: 'channel-created',
+        createdTime: new Date('2016-01-07T08:45:47.000Z')
     }
 ];
 

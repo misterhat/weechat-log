@@ -31,11 +31,27 @@ usage: weechat-log [-ndfjh] <log filenames>
 See https://github.com/misterhat/weechat-log/blob/master/test.js
 
 ## API
-### weechatLog.parseLine(line)
+### weechatLog.parseLine(line, options)
 Parse a single line string into an object.
 
-### weechatLog.fromStream(stream)
-Create an object stream out of an existing `ReadableStream`.
+`line` is a `String` being a line from a log file.
+
+`options` is an optional object which contains the following defaults:
+
+```javascript
+{
+    actionToken: '*', // token for /me actions in log
+    timeFormat: /(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})/
+}
+```
+
+### weechatLog.fromStream(stream, options)
+Construct a readable object stream from an existing log stream.
+
+`stream` is a `ReadableStream`. For instance, you may pass an `fs`-created
+stream of a log file.
+
+`options` is passed into the `parseLine` method.
 
 ## License
 Copyright (C) 2016 Mister Hat
