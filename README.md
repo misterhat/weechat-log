@@ -26,6 +26,10 @@ usage: weechat-log [-nsedfjh] <log filenames>
 <log filenames> are optional. stdin is used by default.
 ```
 
+    $ weechat-log ~/.weechat/logs/* -f '{action}:{message}'
+
+    $ weechat-log -f '{ops}:{halfops}:{nicks}' < ~/.weechat/logs/*
+
 ## Example
 See https://github.com/misterhat/weechat-log/blob/master/test.js
 

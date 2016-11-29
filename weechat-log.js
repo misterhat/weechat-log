@@ -40,10 +40,8 @@ var nicks = argv.n || argv.nicks,
     input, parsed, emptyFormat, stringify;
 
 if (help) {
-    console.log('usage: ' + package.name + ' [-nsedfjh] <log filenames>\n');
+    console.log('usage: ' + package.name + ' [-ndfjh] <log filenames>\n');
     console.log('  -n, --nicks    nicks separated by commas to filter');
-    console.log('  -s, --start    start date (in any format accepted by Date)');
-    console.log('  -e, --end      end date (in any format accepted by Date)');
     console.log('  -d, --date     date format');
     console.log('  -f, --format   line output format');
     console.log('  -j, --json     output in JSON format (overrides format)');
