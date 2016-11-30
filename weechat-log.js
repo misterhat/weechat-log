@@ -19,27 +19,35 @@
  */
 
 var fs = require('fs'),
-
     datef = require('datef'),
     format = require('string-template'),
     mergeStream = require('merge-stream'),
     weechatLog = require('./'),
-
     package = require('./package.json');
 
-var argv = require('minimist')(process.argv.slice(2));
+var opts = {
+  string: ['nicks', 'date', 'format'],
+  boolean: ['help', 'json'],
+  alias: {
+    n: 'nicks',
+    d: 'date',
+    f: 'format',
+    j: 'json',
+    h: 'help'
+  }
+};
 
-var nicks = argv.n || argv.nicks,
-    start = argv.s || argv.start,
-    end = argv.e || argv.end,
-    dateFormat = argv.d || argv.datef,
+var argv = require('minimist')(process.argv.slice(2), opts);
+
+var files = argv._, input, parsed;
+
+/*
+var dateFormat = argv.d || argv.datef,
     useFormat = ((argv.j || argv.json ? 'json' : null) || argv.f ||
                  argv.format || '{message}'),
-    help = argv.h || argv.help,
-    files = argv._,
-    input, parsed, emptyFormat, stringify;
+    emptyFormat, stringify;*/
 
-if (help) {
+if (argv.help) {
     console.log('usage: ' + package.name + ' [-ndfjh] <log filenames>\n');
     console.log('  -n, --nicks    nicks separated by commas to filter');
     console.log('  -d, --date     date format');
@@ -61,6 +69,7 @@ if (files.length) {
     input.add(process.stdin);
 }
 
+/* TODO: Fix everything
 if (useFormat === 'json') {
     console.log('[');
 } else {
@@ -89,4 +98,4 @@ if (useFormat === 'json') {
     parsed.on('end', function () {
         console.log(']');
     });
-}
+}*/
