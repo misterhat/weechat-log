@@ -21,10 +21,11 @@
 var fs = require('fs'),
     datef = require('datef'),
     format = require('string-template'),
+    byline = require('byline'),
     mergeStream = require('merge-stream'),
     filter = require('through2-filter').obj,
     map = require('through2-map').obj,
-    weechatLog = require('./'),
+    parseLine = require('./').parseLine,
     package = require('./package.json');
 
 var opts = {
@@ -37,6 +38,15 @@ var opts = {
     j: 'json',
     h: 'help'
   }
+};
+
+var fromStream = function (source) {
+  var parsed = map(function (line) {
+    return parseLine(line.toString());
+  });
+  
+  byline.createStream(source).pipe(parsed);
+  return parsed;
 };
 
 var argv = require('minimist')(process.argv.slice(2), opts);
@@ -58,7 +68,7 @@ if (argv.help) {
 }
 
 input = mergeStream();
-parsed = weechatLog.fromStream(input);
+parsed = fromStream(input);
 
 if (files && files.length >= 1 && files !== '-') {
     files.forEach(function (file) {

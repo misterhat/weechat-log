@@ -45,14 +45,6 @@ Parse a single line string into an object.
 }
 ```
 
-### weechatLog.fromStream(stream, options)
-Construct a readable object stream from an existing log stream.
-
-`stream` is a `ReadableStream`. For instance, you may pass an `fs`-created
-stream of a log file.
-
-`options` is passed into the `parseLine` method.
-
 ## License
 Copyright (C) 2016 Mister Hat
 
