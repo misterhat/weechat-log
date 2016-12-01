@@ -104,5 +104,5 @@ parsed.pipe(map(function (entry) {
     return formatted + '\n';
   }
 
-  return;
+  return '';
 })).pipe(process.stdout);
