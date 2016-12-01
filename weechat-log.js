@@ -81,10 +81,10 @@ if (files && files.length >= 1 && files !== '-') {
 if (!argv.format) {
   parsed = parsed.pipe(filter(function (entry) {
     if (nicks) {
-      return (Array.isArray(nicks) ? nicks.indexOf(entry.nick) > -1 : nicks === entry.nick) && entry.message;
+      return (Array.isArray(nicks) ? nicks.indexOf(entry.nick) > -1 : nicks === entry.nick) && entry.action === 'privmsg' && entry.message;
     }
 
-    return entry.message;
+    return entry.action === 'privmsg' && entry.message;
   }))
 }
 
