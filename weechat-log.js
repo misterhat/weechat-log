@@ -74,7 +74,7 @@ if (!argv.format) {
       return (Array.isArray(nicks) ? nicks.indexOf(entry.nick) > -1 : nicks === entry.nick) && entry.message;
     }
 
-    return entry.message
+    return entry.message;
   }))
 }
 
@@ -95,4 +95,4 @@ parsed.pipe(map(function (entry) {
   }
 
   return;
-})).pipe(process.stdout)
+})).pipe(process.stdout);
