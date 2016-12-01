@@ -17,9 +17,6 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
  */
 
-var byline = require('byline'),
-    map = require('through2-map');
-
 var TIME_MATCH = /^(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})/,
     NICK_MATCH = /([@|~|&|%|+]?\S+)/,
     HOST_MATCH = /([A-Za-z0-9\-\.\:]{1,63})/,
@@ -164,13 +161,3 @@ function parseLine(line, options) {
 }
 
 module.exports.parseLine = parseLine;
-
-module.exports.fromStream = function (source, options) {
-    var parsed = map({ objectMode: true }, function (line) {
-        return parseLine(line.toString(), options);
-    });
-
-    byline.createStream(source).pipe(parsed);
-
-    return parsed;
-};
