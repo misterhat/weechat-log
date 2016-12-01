@@ -1,6 +1,6 @@
 {
   "name": "weechat-log",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "stream plaintext weechat logs into objects",
   "main": "index.js",
   "scripts": {

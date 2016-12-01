@@ -44,7 +44,7 @@ var fromStream = function (source) {
   var parsed = map(function (line) {
     return parseLine(line.toString());
   });
-  
+
   byline.createStream(source).pipe(parsed);
   return parsed;
 };
@@ -52,7 +52,7 @@ var fromStream = function (source) {
 var argv = require('minimist')(process.argv.slice(2), opts);
 
 var files = argv._,
-  nicks = argv.nicks && argv.nicks.indexOf(',') > -1 ? argv.nicks.split(',') : argv.nicks,
+  nicks = argv.nicks ? argv.nicks.split(',') : false,
   useFormat = argv.format || '{message}',
   input, parsed;
 
@@ -78,31 +78,37 @@ if (files && files.length >= 1 && files !== '-') {
     input.add(process.stdin);
 }
 
-if (!argv.format) {
-  parsed = parsed.pipe(filter(function (entry) {
-    if (nicks) {
-      return (Array.isArray(nicks) ? nicks.indexOf(entry.nick) > -1 : nicks === entry.nick) && entry.action === 'privmsg' && entry.message;
+parsed = parsed.pipe(filter(function (entry) {
+    var nickFound = true;
+
+    if (!entry) {
+        return false;
     }
 
-    return entry.action === 'privmsg' && entry.message;
-  }))
-}
+    if (nicks && nicks.length) {
+        nickFound = nicks.indexOf(entry.nick) > -1;
+    }
+
+    return nickFound && entry.message;
+}));
 
 parsed.pipe(map(function (entry) {
-  if (argv.date) {
-    entry.time = datef(argv.date, entry.time);
-  } 
-  
-  if (argv.json) {
-    return JSON.stringify(entry) + '\n';
-  }
-  
-  var emptyFormat = useFormat.replace(/\{.*?\}/g, '');
-  var formatted = format(useFormat, entry).trim();
-    
-  if (formatted.length > emptyFormat.length) {
-    return formatted + '\n';
-  }
+    var emptyFormat, formatted;
 
-  return '';
+    if (argv.date) {
+        entry.time = datef(argv.date, entry.time);
+    }
+
+    if (argv.json) {
+        return JSON.stringify(entry) + '\n';
+    }
+
+    emptyFormat = useFormat.replace(/\{.*?\}/g, '');
+    formatted = format(useFormat, entry).trim();
+
+    if (formatted.length > emptyFormat.length) {
+        return formatted + '\n';
+    }
+
+    return '';
 })).pipe(process.stdout);
