@@ -84,7 +84,7 @@ parsed.pipe(map(function (entry) {
   } 
   
   if (argv.json) {
-    return JSON.stringify(entry);
+    return JSON.stringify(entry) + '\n';
   }
   
   var emptyFormat = useFormat.replace(/\{.*?\}/g, '');
@@ -94,5 +94,5 @@ parsed.pipe(map(function (entry) {
     return formatted + '\n';
   }
 
-  return '';
+  return;
 })).pipe(process.stdout)
